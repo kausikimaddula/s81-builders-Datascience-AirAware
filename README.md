@@ -3,7 +3,13 @@
 This repository currently documents the **thinking and intent** behind an air-quality data science project called **AirAware**.
 
 The milestone for this PR is about demonstrating that you can **read what exists, infer intent, and identify gaps** before writing code. This README is written to help a new contributor understand (1) what the project is trying to do, (2) how work would flow through a typical data-science lifecycle, and (3) what’s missing / still undecided.
+## 📋 Quick Links
 
+- **[PROJECT_PLAN.md](PROJECT_PLAN.md)** — Comprehensive 4-week sprint plan with all 9 planning sections: problem statement, dataset selection, roles, timeline, deployment, MVP, requirements, success metrics, and risk mitigation.
+- **[docs/repository-review-checklist.md](docs/repository-review-checklist.md)** — Checklist for understanding project intent before contributing.
+- **[docs/readme-audit-template.md](docs/readme-audit-template.md)** — Template for auditing documentation completeness.
+- **[docs/folder-lifecycle-map.md](docs/folder-lifecycle-map.md)** — Folder-to-lifecycle mapping and change boundaries.
+- **[notebooks/01_repo_intent_review.ipynb](notebooks/01_repo_intent_review.ipynb)** — Interactive notebook for structured repository review.
 ---
 
 ## 1) Project Intent & High-Level Flow
