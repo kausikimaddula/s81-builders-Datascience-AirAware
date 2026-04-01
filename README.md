@@ -1,155 +1,99 @@
-# 🌍 AirAware — Data Science Repo Readme (Question → Data → Insight)
+# AirAware: Repository Reading and Contribution Milestone
 
-This repository currently documents the **thinking and intent** behind an air-quality data science project called **AirAware**.
+This repository is designed to train a core data science skill: reading a project as a story, not just a set of files.
 
-The milestone for this PR is about demonstrating that you can **read what exists, infer intent, and identify gaps** before writing code. This README is written to help a new contributor understand (1) what the project is trying to do, (2) how work would flow through a typical data-science lifecycle, and (3) what’s missing / still undecided.
+The goal of this milestone is to help contributors understand intent before implementation.
 
----
+## 1. A Repository Is a Story, Not Just Files
 
-## 1) Project Intent & High-Level Flow
+Use these guiding questions before making changes:
 
-### What problem is AirAware trying to address?
+1. What problem is this project trying to solve?
+2. How does the structure reflect the data science lifecycle?
+3. What work is already complete, and what assumptions does it rely on?
 
-AirAware aims to help **citizens understand air pollution trends** and **anticipate potential health-risk conditions** in their city.
+For AirAware, the core problem is:
 
-The underlying question is:
+How can citizens better understand air pollution trends and anticipate health risks in their city?
 
-> **How can citizens better understand air pollution trends and anticipate health risks in their city?**
+This keeps the project focused on decision support rather than model-building without context.
 
-This frames the project as **decision support** (inform safer outdoor timing, risk awareness) rather than “build a model for its own sake.”
+## 2. README as the Project Entry Point
 
-### What high-level workflow does the repository imply?
+A strong README should communicate:
 
-Even though this repo does not yet contain datasets, notebooks, or pipelines, the documented workflow is a standard data-science loop:
+1. Problem statement and intended user impact
+2. Dataset sources and quality considerations
+3. Workflow from data ingestion to insight generation
+4. Main outputs and key takeaways
+5. How to run or explore the project
 
-1. **Question (problem framing)**
-   - Define the user, decision, scope, and what “success” means.
-2. **Data (evidence gathering & validation)**
-   - Identify sources (air quality + weather), collect, and evaluate quality/bias.
-3. **Insight (analysis → communication → action)**
-   - Translate patterns into recommendations and (optionally) forecasts.
+This repository now includes templates and checklists in [docs/repository-review-checklist.md](docs/repository-review-checklist.md) and [docs/readme-audit-template.md](docs/readme-audit-template.md) to evaluate whether documentation is complete.
 
-If/when this becomes an executable project, the typical next steps would extend the “Data → Insight” stage into:
+## 3. Folder Structure and Lifecycle Mapping
 
-- Ingestion (API pulls / historical downloads)
-- Cleaning & feature engineering (time-based features, lag features, meteorology joins)
-- Exploratory analysis (seasonality, events, missingness)
-- Modeling (forecast AQI/PM, classification of risk days, etc.)
-- Evaluation (backtesting, error metrics, stability)
-- Reporting (plots, dashboards, written takeaways)
+Folder names are less important than lifecycle intent. The structure below maps to common data science stages:
 
-### How does the current repository reflect lifecycle stages?
+- [data/raw/](data/raw/): source-aligned files, never manually edited
+- [data/processed/](data/processed/): cleaned or transformed datasets
+- [notebooks/](notebooks/): exploration, hypothesis testing, and narrative analysis
+- [src/](src/): reusable code for ingestion, cleaning, and modeling
+- [reports/figures/](reports/figures/): finalized charts used in communication
+- [docs/](docs/): project intent, assumptions, review notes, and contribution guidance
 
-Right now, the repository reflects **only the earliest lifecycle stage**: problem framing.
+See [docs/folder-lifecycle-map.md](docs/folder-lifecycle-map.md) for responsibilities and change boundaries.
 
-- The “Question → Data → Insight” framing shows the project is deliberately starting with intent and decision-making.
-- There is **no implemented “Data” layer** (no raw/processed datasets, no ingestion scripts) and **no “Insight” artifacts** (no notebooks/reports).
+## 4. Reading Notebooks and Code with Purpose
 
-That’s not “wrong” for a milestone focused on reading/reasoning—just important context for contributors.
+When reviewing notebooks or scripts, focus on flow before syntax details:
 
----
+1. Where data is loaded and from which source
+2. How missing values and data quality issues are handled
+3. What transformations produce analysis-ready features
+4. Which sections are exploratory vs. final
+5. How findings connect back to the original question
 
-## 2) Repository Structure & File Roles
+A starter notebook is provided at [notebooks/01_repo_intent_review.ipynb](notebooks/01_repo_intent_review.ipynb) to support structured repository review.
 
-### What exists today (current structure)
+## 5. Assumptions, Limitations, and Open Questions
 
-- `README.md`: The only project artifact in the repository. It documents the project intent and a conceptual workflow.
-- `.git/`: Version control metadata.
+Critical review means identifying what is implied but not yet proven.
 
-### How exploratory work vs finalized analysis is represented here
+Typical checks for this project:
 
-At the moment, exploratory and finalized analysis are **not present**. In a more complete data-science repo, you would usually see:
+1. Are air quality and weather data sources available and reliable?
+2. Is the health risk definition explicit and justified?
+3. Are there missing data periods, sampling issues, or location bias?
+4. Are evaluation metrics aligned with user decisions?
+5. What important questions remain unresolved?
 
-- **Exploratory work**: messy, iterative notebooks; lots of plots; quick sanity checks; competing hypotheses.
-- **Finalized analysis**: reproducible scripts/notebooks; stable data contracts; clear outputs; documented assumptions; consistent run steps.
+Use [docs/repository-review-checklist.md](docs/repository-review-checklist.md) to document findings consistently.
 
-This repo is currently **pre-analysis** (documentation and intent only).
+## 6. How This Milestone Prepares You to Contribute
 
-### Where a new contributor should be cautious
+By following this milestone process, contributors can:
 
-Since the README is currently the “source of truth,” changes here can unintentionally shift scope.
+1. Extend analysis without breaking existing workflows
+2. Avoid duplicate work by understanding what already exists
+3. Improve documentation where intent is unclear
+4. Ask stronger, evidence-based questions in review discussions
 
-Be especially careful when modifying:
+## Recommended Contributor Workflow
 
-- The **main question** (it changes what data and modeling choices make sense)
-- The **definition of “health risk”** (this impacts labeling, thresholds, and ethics)
-- Any implied **data sources** (availability, licensing, rate limits, geography)
+1. Read this README fully
+2. Complete the template in [docs/readme-audit-template.md](docs/readme-audit-template.md)
+3. Walk through repository stages using [docs/folder-lifecycle-map.md](docs/folder-lifecycle-map.md)
+4. Capture assumptions and gaps using [docs/repository-review-checklist.md](docs/repository-review-checklist.md)
+5. Start new work in an additive way (new notebook or script) before refactoring existing artifacts
 
-If you want to extend the project, it’s safer to **add new work** (new notebook, new script, new doc) rather than rewriting the problem statement.
+## Current Repository State
 
----
+This repository is currently focused on interpretation and contribution readiness.
 
-## 3) Assumptions, Gaps, and Open Questions
+- Documentation and review structure: available
+- Executable pipeline code: starter layout only
+- Data files and model outputs: not committed in this milestone
 
-### Assumptions implied by the current documentation
-
-- **Air quality and weather data are available** for the target city (via government/environmental APIs, weather APIs, etc.).
-- **AQI/PM measures map meaningfully to “health risk”** for the intended audience.
-- **Forecasting is useful** (users gain value from predicted risk levels, not only historical trends).
-- The project is city-based and assumes a consistent **location/time index** for joins.
-
-### Gaps / unclear steps (what a contributor can’t yet infer)
-
-- **Data source decision**: Which API(s)? What historical coverage? What licensing/terms?
-- **Scope**: Which city/cities? Single city MVP vs multi-city generalization?
-- **Target & evaluation**: What exactly is predicted (AQI, PM2.5, risk category)? What metric defines “good”?
-- **Definition of “health risk”**: Which standard (e.g., AQI categories) and what user guidance is appropriate?
-- **Reproducibility**: No environment spec, run steps, or pipeline conventions exist yet.
-
-### One concrete improvement to make the repo easier to extend
-
-Add a minimal “execution skeleton” that turns intent into a reproducible workflow. For example:
-
-- A `data/` folder with a short `data/README.md` describing the intended sources and schemas.
-- A `notebooks/` folder for exploration (numbered notebooks).
-- A `src/` (or `scripts/`) folder for reusable code (ingestion, cleaning, features).
-- An `outputs/` folder for generated charts/reports (kept out of git if large).
-- A `requirements.txt` (or `environment.yml`) to make runs reproducible.
-
-This improvement is valuable because it separates exploratory work from stable components and reduces the chance a new contributor “breaks” others’ work.
-
----
-
-## Contributor Decision-Making (How to Extend Without Breaking Things)
-
-If you are asked to add a new analysis but you’re unsure where to start:
-
-1. **Start from the question**
-   - Confirm the user decision you’re supporting (trend awareness? next-week forecast? high-risk alerts?).
-2. **Add work in an isolated place first**
-   - Create a new notebook for exploration, or a new script that does not change existing artifacts.
-3. **Treat data contracts as stable once established**
-   - When a dataset schema is agreed upon, avoid “quietly” changing column meanings/types without updating docs.
-4. **Promote only what’s reproducible**
-   - Move reusable logic from notebooks into scripts/modules only after it’s validated.
-5. **Prefer additive PRs**
-   - New files and new outputs are safer than refactoring the original intent.
-
----
-
-## Video Walkthrough (≈2 Minutes) — Suggested Script
-
-Use this as a checklist so your video includes reasoning, not just a file tour.
-
-**0:00–0:20 — Show the repo structure**
-
-- “This repo is minimal: it currently contains a single README that documents project intent.”
-- “That tells me the project is in the *problem framing* stage, not the implementation stage.”
-
-**0:20–1:05 — Explain intent + flow (Question → Data → Insight)**
-
-- “The core question is about helping citizens understand pollution trends and anticipate risk.”
-- “The workflow implied is: define the question, gather/evaluate data (air quality + weather), then produce insights and potentially forecasts.”
-- “This README helps by clarifying purpose before modeling.”
-
-**1:05–1:35 — Explain what’s missing / open questions**
-
-- “There are no data sources chosen yet, no notebook outputs, and no reproducible run steps.”
-- “The biggest open question is how ‘health risk’ is defined and evaluated.”
-
-**1:35–2:00 — Scenario-based reasoning (mandatory)**
-
-- “If I needed to add a new analysis without breaking work, I’d start with an additive notebook or script and avoid changing the problem statement.”
-- “I’d use documentation to decide what to leave untouched (the core question/assumptions) and what to extend (new analysis artifacts, new data ingestion code once sources are chosen).”
+That is intentional for this phase. The objective is to build strong repository-reading behavior before expanding implementation.
 
 
