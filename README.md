@@ -1,211 +1,155 @@
-# 🌍 AirAware – Data Science Thinking: Question → Data → Insight
+# 🌍 AirAware — Data Science Repo Readme (Question → Data → Insight)
 
-## 📌 Overview
+This repository currently documents the **thinking and intent** behind an air-quality data science project called **AirAware**.
 
-**AirAware** is a conceptual data science project focused on helping citizens understand air pollution trends and forecast health risks through clear, meaningful insights.
+The milestone for this PR is about demonstrating that you can **read what exists, infer intent, and identify gaps** before writing code. This README is written to help a new contributor understand (1) what the project is trying to do, (2) how work would flow through a typical data-science lifecycle, and (3) what’s missing / still undecided.
 
-This project emphasizes **how data science thinking begins before tools or models**, using the structured lifecycle:
+---
 
-> **Question → Data → Insight**
+## 1) Project Intent & High-Level Flow
 
+### What problem is AirAware trying to address?
 
-## 📌 Part A: Understanding the Lifecycle
+AirAware aims to help **citizens understand air pollution trends** and **anticipate potential health-risk conditions** in their city.
 
-### 🔍 1. Question → Data → Insight Lifecycle
+The underlying question is:
 
-Data science is not just about coding or algorithms—it starts with **thinking clearly about the problem**.
+> **How can citizens better understand air pollution trends and anticipate health risks in their city?**
 
+This frames the project as **decision support** (inform safer outdoor timing, risk awareness) rather than “build a model for its own sake.”
 
-### ❓ Step 1: Starting with the Question
+### What high-level workflow does the repository imply?
 
-Every data science process begins with a **clear and focused question**.
+Even though this repo does not yet contain datasets, notebooks, or pipelines, the documented workflow is a standard data-science loop:
 
-This step is important because:
+1. **Question (problem framing)**
+   - Define the user, decision, scope, and what “success” means.
+2. **Data (evidence gathering & validation)**
+   - Identify sources (air quality + weather), collect, and evaluate quality/bias.
+3. **Insight (analysis → communication → action)**
+   - Translate patterns into recommendations and (optionally) forecasts.
 
-* It defines the **goal of the analysis**
-* It ensures we are solving a **real-world problem**
-* It prevents unnecessary or random exploration
+If/when this becomes an executable project, the typical next steps would extend the “Data → Insight” stage into:
 
-If we skip this step:
+- Ingestion (API pulls / historical downloads)
+- Cleaning & feature engineering (time-based features, lag features, meteorology joins)
+- Exploratory analysis (seasonality, events, missingness)
+- Modeling (forecast AQI/PM, classification of risk days, etc.)
+- Evaluation (backtesting, error metrics, stability)
+- Reporting (plots, dashboards, written takeaways)
 
-* We may analyze irrelevant data
-* We may reach conclusions that don’t help anyone
+### How does the current repository reflect lifecycle stages?
 
-👉 A strong question guides the entire workflow.
+Right now, the repository reflects **only the earliest lifecycle stage**: problem framing.
 
+- The “Question → Data → Insight” framing shows the project is deliberately starting with intent and decision-making.
+- There is **no implemented “Data” layer** (no raw/processed datasets, no ingestion scripts) and **no “Insight” artifacts** (no notebooks/reports).
 
-### 📊 Step 2: Understanding Data as Evidence
+That’s not “wrong” for a milestone focused on reading/reasoning—just important context for contributors.
 
-Once the question is defined, data acts as **evidence**.
+---
 
-Understanding data involves:
+## 2) Repository Structure & File Roles
 
-* Knowing **where it comes from**
-* Understanding **what each column represents**
-* Identifying **missing values, noise, or bias**
+### What exists today (current structure)
 
-Before analyzing, we must ask:
+- `README.md`: The only project artifact in the repository. It documents the project intent and a conceptual workflow.
+- `.git/`: Version control metadata.
 
-* Does this data actually answer our question?
-* Is the data reliable and complete?
+### How exploratory work vs finalized analysis is represented here
 
-👉 Data is meaningful only when we understand its context.
+At the moment, exploratory and finalized analysis are **not present**. In a more complete data-science repo, you would usually see:
 
+- **Exploratory work**: messy, iterative notebooks; lots of plots; quick sanity checks; competing hypotheses.
+- **Finalized analysis**: reproducible scripts/notebooks; stable data contracts; clear outputs; documented assumptions; consistent run steps.
 
-### 💡 Step 3: Generating Insights
+This repo is currently **pre-analysis** (documentation and intent only).
 
-Insights are not just numbers or charts—they are **useful conclusions**.
+### Where a new contributor should be cautious
 
-Insights emerge when:
+Since the README is currently the “source of truth,” changes here can unintentionally shift scope.
 
-* We connect patterns back to the original question
-* We explain what the results mean in real life
-* We provide information that supports decisions
+Be especially careful when modifying:
 
-👉 A true insight answers:
-**“What should we do with this information?”**
+- The **main question** (it changes what data and modeling choices make sense)
+- The **definition of “health risk”** (this impacts labeling, thresholds, and ethics)
+- Any implied **data sources** (availability, licensing, rate limits, geography)
 
+If you want to extend the project, it’s safer to **add new work** (new notebook, new script, new doc) rather than rewriting the problem statement.
 
-### 🔗 Connection Between Steps
+---
 
-* The **question** decides what data we need
-* The **data** provides the foundation for analysis
-* The **insight** delivers value and meaning
+## 3) Assumptions, Gaps, and Open Questions
 
-If any step is weak:
+### Assumptions implied by the current documentation
 
-* Wrong question → irrelevant insights
-* Poor data → incorrect conclusions
-* Weak insights → no real impact
+- **Air quality and weather data are available** for the target city (via government/environmental APIs, weather APIs, etc.).
+- **AQI/PM measures map meaningfully to “health risk”** for the intended audience.
+- **Forecasting is useful** (users gain value from predicted risk levels, not only historical trends).
+- The project is city-based and assumes a consistent **location/time index** for joins.
 
+### Gaps / unclear steps (what a contributor can’t yet infer)
 
-## 📌 Part A: Applying the Lifecycle (Project Context)
+- **Data source decision**: Which API(s)? What historical coverage? What licensing/terms?
+- **Scope**: Which city/cities? Single city MVP vs multi-city generalization?
+- **Target & evaluation**: What exactly is predicted (AQI, PM2.5, risk category)? What metric defines “good”?
+- **Definition of “health risk”**: Which standard (e.g., AQI categories) and what user guidance is appropriate?
+- **Reproducibility**: No environment spec, run steps, or pipeline conventions exist yet.
 
-### 🌆 Project Context: AirAware
+### One concrete improvement to make the repo easier to extend
 
-### ❓ Question
+Add a minimal “execution skeleton” that turns intent into a reproducible workflow. For example:
 
-**“How can citizens better understand air pollution trends and anticipate health risks in their city?”**
+- A `data/` folder with a short `data/README.md` describing the intended sources and schemas.
+- A `notebooks/` folder for exploration (numbered notebooks).
+- A `src/` (or `scripts/`) folder for reusable code (ingestion, cleaning, features).
+- An `outputs/` folder for generated charts/reports (kept out of git if large).
+- A `requirements.txt` (or `environment.yml`) to make runs reproducible.
 
-This question focuses on:
+This improvement is valuable because it separates exploratory work from stable components and reduces the chance a new contributor “breaks” others’ work.
 
-* Awareness
-* Prevention
-* Health-conscious decision-making
+---
 
+## Contributor Decision-Making (How to Extend Without Breaking Things)
 
-### 📊 Data Required
+If you are asked to add a new analysis but you’re unsure where to start:
 
-To answer this question, we would use:
+1. **Start from the question**
+   - Confirm the user decision you’re supporting (trend awareness? next-week forecast? high-risk alerts?).
+2. **Add work in an isolated place first**
+   - Create a new notebook for exploration, or a new script that does not change existing artifacts.
+3. **Treat data contracts as stable once established**
+   - When a dataset schema is agreed upon, avoid “quietly” changing column meanings/types without updating docs.
+4. **Promote only what’s reproducible**
+   - Move reusable logic from notebooks into scripts/modules only after it’s validated.
+5. **Prefer additive PRs**
+   - New files and new outputs are safer than refactoring the original intent.
 
-* **Air Quality Data (AQI, PM2.5, PM10)**
-  → From environmental or government APIs
+---
 
-* **Weather Data (temperature, humidity, wind speed)**
-  → From weather APIs
+## Video Walkthrough (≈2 Minutes) — Suggested Script
 
-* **Location Data (city/region-based)**
+Use this as a checklist so your video includes reasoning, not just a file tour.
 
-* **Historical Pollution Data**
-  → To identify trends and patterns
+**0:00–0:20 — Show the repo structure**
 
-This data represents:
+- “This repo is minimal: it currently contains a single README that documents project intent.”
+- “That tells me the project is in the *problem framing* stage, not the implementation stage.”
 
-* Environmental conditions
-* Pollution fluctuations over time
-* External factors affecting air quality
+**0:20–1:05 — Explain intent + flow (Question → Data → Insight)**
 
+- “The core question is about helping citizens understand pollution trends and anticipate risk.”
+- “The workflow implied is: define the question, gather/evaluate data (air quality + weather), then produce insights and potentially forecasts.”
+- “This README helps by clarifying purpose before modeling.”
 
-### 💡 Expected Insights
+**1:05–1:35 — Explain what’s missing / open questions**
 
-The insights should be **practical and actionable**, such as:
+- “There are no data sources chosen yet, no notebook outputs, and no reproducible run steps.”
+- “The biggest open question is how ‘health risk’ is defined and evaluated.”
 
-* 📈 **Trend Insights**
-  → Pollution increases during certain seasons
+**1:35–2:00 — Scenario-based reasoning (mandatory)**
 
-* ⚠️ **Risk Levels**
-  → High AQI levels indicate health risks
+- “If I needed to add a new analysis without breaking work, I’d start with an additive notebook or script and avoid changing the problem statement.”
+- “I’d use documentation to decide what to leave untouched (the core question/assumptions) and what to extend (new analysis artifacts, new data ingestion code once sources are chosen).”
 
-* 🔮 **Forecasts**
-  → Predict future pollution levels
-
-* 🧭 **Recommendations**
-  → Suggest safer times for outdoor activities
-
-👉 These insights help users make **informed daily decisions**, not just view data.
-
-
-## 🎥 Part B: Video Walkthrough Guide
-
-### 🗣️ Explaining the Lifecycle
-
-In your video, explain:
-
-* “Data science starts with a question, not with tools.”
-* The flow:
-
-  * Question → defines direction
-  * Data → provides evidence
-  * Insight → gives meaning
-
-
-### 🧠 Scenario-Based Reasoning
-
-**Scenario:** You receive a dataset with many columns but no clear problem statement. A teammate suggests immediately building models and visualizations.
-
-
-### ✅ Your Response
-
-“I would not jump directly into building models or visualizations.”
-
-
-### Step 1: Clarify the Question
-
-* Ask:
-
-  * What problem are we solving?
-  * Who is the end user?
-
-👉 Without this, the analysis may lack purpose.
-
-
-### Step 2: Understand the Data
-
-* Examine:
-
-  * Column meanings
-  * Data quality
-  * Relevance to potential problems
-
-
-### ⚠️ Risks of Skipping Steps
-
-* Finding patterns that are meaningless
-* Building models that solve the wrong problem
-* Producing insights that are not useful
-
-👉 “We may get results, but they won’t be meaningful.”
-
-
-### Step 3: Realign the Work
-
-* Define a clear objective
-* Select relevant data
-* Then proceed with analysis
-
-
-### 🎯 Closing Statement for Video
-
-“Data science is not about using tools—it’s about asking the right question, using the right data, and generating meaningful insights.”
-
-
-## 🌱 Conclusion
-
-AirAware demonstrates that strong data science begins with:
-
-* Clear problem understanding
-* Thoughtful data evaluation
-* Meaningful interpretation
-
-Not just algorithms or visualizations.
 
