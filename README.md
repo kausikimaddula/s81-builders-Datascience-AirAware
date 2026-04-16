@@ -1,99 +1,76 @@
-# AirAware: Repository Reading and Contribution Milestone
+# NGO Data Cleaning & Analytics System
 
-This repository is designed to train a core data science skill: reading a project as a story, not just a set of files.
+A full-stack application to upload NGO complaint data, run a structured data-cleaning pipeline, and visualize key insights.
 
-The goal of this milestone is to help contributors understand intent before implementation.
+## Tech Stack
 
-## 1. A Repository Is a Story, Not Just Files
+- Frontend: React + Tailwind CSS + Axios + Recharts
+- Backend: FastAPI + Pandas + NumPy
+- Persistence: SQLite (for cleaned dataset snapshots)
 
-Use these guiding questions before making changes:
+## Project Structure
 
-1. What problem is this project trying to solve?
-2. How does the structure reflect the data science lifecycle?
-3. What work is already complete, and what assumptions does it rely on?
+```text
+/backend
+  main.py
+  cleaning.py
+  models.py
+  requirements.txt
+/frontend
+  src/components
+  src/pages
+  src/services
+```
 
-For AirAware, the core problem is:
+## Backend Setup
 
-How can citizens better understand air pollution trends and anticipate health risks in their city?
+```bash
+cd backend
+python -m venv .venv
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8001
+```
 
-This keeps the project focused on decision support rather than model-building without context.
+## Frontend Setup
 
-## 2. README as the Project Entry Point
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-A strong README should communicate:
+Frontend runs on http://127.0.0.1:5173 and backend on http://127.0.0.1:8001.
 
-1. Problem statement and intended user impact
-2. Dataset sources and quality considerations
-3. Workflow from data ingestion to insight generation
-4. Main outputs and key takeaways
-5. How to run or explore the project
+## API Endpoints
 
-This repository now includes templates and checklists in [docs/repository-review-checklist.md](docs/repository-review-checklist.md) and [docs/readme-audit-template.md](docs/readme-audit-template.md) to evaluate whether documentation is complete.
+- POST /upload: Upload CSV or JSON and trigger cleaning pipeline
+- GET /cleaned-data: Fetch cleaned records with search/filter/pagination
+- GET /stats: Fetch analytics for charts
+- GET /download: Download cleaned CSV
+- GET /progress: Check cleaning progress
+- GET /mappings: Get category mappings
+- PUT /mappings: Update category mappings
+- POST /duplicates/scan: Find probable duplicate complaint pairs
+- POST /ml/train: Train text classifier from cleaned data
+- POST /ml/predict: Predict category for issue text
 
-## 3. Folder Structure and Lifecycle Mapping
+## Data Cleaning Rules
 
-Folder names are less important than lifecycle intent. The structure below maps to common data science stages:
+1. Exact duplicate removal and fuzzy duplicate detection
+2. Missing critical fields dropped (`issue`, `date`)
+3. Text and date normalization
+4. Area standardization and category label normalization
+5. Special character cleanup and whitespace normalization
+6. Validation for future dates and empty required fields
 
-- [data/raw/](data/raw/): source-aligned files, never manually edited
-- [data/processed/](data/processed/): cleaned or transformed datasets
-- [notebooks/](notebooks/): exploration, hypothesis testing, and narrative analysis
-- [src/](src/): reusable code for ingestion, cleaning, and modeling
-- [reports/figures/](reports/figures/): finalized charts used in communication
-- [docs/](docs/): project intent, assumptions, review notes, and contribution guidance
+## Optional ML Extensions
 
-See [docs/folder-lifecycle-map.md](docs/folder-lifecycle-map.md) for responsibilities and change boundaries.
+This project now includes scikit-learn based auto-categorization endpoints.
 
-## 4. Reading Notebooks and Code with Purpose
+## Run Notes
 
-When reviewing notebooks or scripts, focus on flow before syntax details:
-
-1. Where data is loaded and from which source
-2. How missing values and data quality issues are handled
-3. What transformations produce analysis-ready features
-4. Which sections are exploratory vs. final
-5. How findings connect back to the original question
-
-A starter notebook is provided at [notebooks/01_repo_intent_review.ipynb](notebooks/01_repo_intent_review.ipynb) to support structured repository review.
-
-## 5. Assumptions, Limitations, and Open Questions
-
-Critical review means identifying what is implied but not yet proven.
-
-Typical checks for this project:
-
-1. Are air quality and weather data sources available and reliable?
-2. Is the health risk definition explicit and justified?
-3. Are there missing data periods, sampling issues, or location bias?
-4. Are evaluation metrics aligned with user decisions?
-5. What important questions remain unresolved?
-
-Use [docs/repository-review-checklist.md](docs/repository-review-checklist.md) to document findings consistently.
-
-## 6. How This Milestone Prepares You to Contribute
-
-By following this milestone process, contributors can:
-
-1. Extend analysis without breaking existing workflows
-2. Avoid duplicate work by understanding what already exists
-3. Improve documentation where intent is unclear
-4. Ask stronger, evidence-based questions in review discussions
-
-## Recommended Contributor Workflow
-
-1. Read this README fully
-2. Complete the template in [docs/readme-audit-template.md](docs/readme-audit-template.md)
-3. Walk through repository stages using [docs/folder-lifecycle-map.md](docs/folder-lifecycle-map.md)
-4. Capture assumptions and gaps using [docs/repository-review-checklist.md](docs/repository-review-checklist.md)
-5. Start new work in an additive way (new notebook or script) before refactoring existing artifacts
-
-## Current Repository State
-
-This repository is currently focused on interpretation and contribution readiness.
-
-- Documentation and review structure: available
-- Executable pipeline code: starter layout only
-- Data files and model outputs: not committed in this milestone
-
-That is intentional for this phase. The objective is to build strong repository-reading behavior before expanding implementation.
-
-
+- Backend is a FastAPI app, so run `uvicorn main:app --reload --port 8001` inside backend.
+- Frontend is a Vite app, so run `npm run dev` inside frontend.
+- `npm start` is not used for this setup.
